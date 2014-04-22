@@ -1,10 +1,10 @@
 use exec::{ExecStrategy, PikeVM};
 use compile::Instruction;
 use result::Match;
-use parse::{parse, ParseFlags};
+use parse::parse;
 use compile::compile_recursive;
-use error::ParseError::*;
-
+pub use error::ParseError::*;
+pub use parse::ParseFlags;
 /// Uncompiled regular expression.
 pub struct UncompiledRegexp {
 	prog: ~[Instruction]
