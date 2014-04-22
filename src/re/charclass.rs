@@ -1,4 +1,4 @@
-use parse::{Expr, CharClass, RangeExpr, RangeTable, NegatedRangeTable};
+use parse::{Expr, RangeExpr, RangeTable, NegatedRangeTable};
 use std::char::{from_u32, MAX};
 use std::cmp::{Less, Greater};
 
