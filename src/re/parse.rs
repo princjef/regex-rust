@@ -2,7 +2,6 @@ use state::State;
 use std::char;
 use std::char::MAX;
 use std::str;
-use std::slice;
 use error::ParseError::*;
 use unicode::*;
 use charclass::{Range, new_negated_charclass, perl, ascii, next_char, prev_char};
@@ -43,7 +42,7 @@ pub struct ParseFlags {
   i: bool,
   m: bool,
   s: bool,
-  U: bool
+  u: bool
 }
 
 impl ParseFlags {
@@ -52,7 +51,7 @@ impl ParseFlags {
       i: false,
       m: false,
       s: false,
-      U: false
+      u: false
     }
   }
 }
@@ -64,7 +63,7 @@ impl ParseFlags {
         'i' => self.i = true,
         'm' => self.m = true,
         's' => self.s = true,
-        'U' => self.U = true,
+        'U' => self.u = true,
         _ => ()
       }
     }
@@ -76,7 +75,7 @@ impl ParseFlags {
         'i' => self.i = false,
         'm' => self.m = false,
         's' => self.s = false,
-        'U' => self.U = false,
+        'U' => self.u = false,
         _ => ()
       }
     }
@@ -151,7 +150,7 @@ fn parse_escape(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode> {
                 p.next();
                 return Ok(LiteralString(literal.into_owned()));
               },
-              Some(c) => {
+              Some(_) => {
                 literal.push_char('\\');
               },
               _ => {return Err(ParseIncompleteEscapeSeq)}
@@ -400,7 +399,7 @@ fn parse_hex_escape(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode
           _ => {return Err(ParseExpectedClosingBrace)}
         }
       },
-    Some(c) => {
+    Some(_) => {
       match extract_hex_value(p) {
         Some(c) => {
             return Ok(Literal(c as char));
@@ -616,7 +615,7 @@ fn parse_group(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode> {
                 p.next();
               }
               Some('U') => {
-                scoped_flags.U = set_val;
+                scoped_flags.u = set_val;
                 p.next();
               }
               Some('-') => {
@@ -631,7 +630,7 @@ fn parse_group(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode> {
                 f.i = scoped_flags.i;
                 f.m = scoped_flags.m;
                 f.s = scoped_flags.s;
-                f.U = scoped_flags.U;
+                f.u = scoped_flags.u;
                 p.next();
                 return Ok(Empty);
               }
@@ -813,14 +812,14 @@ fn parse_repetition_op(p: &mut State, f: &mut ParseFlags, stack: &mut ~[Expr], c
   let quantifier = match p.current() {
     Some('?') => {
       p.next();
-      if f.U {
+      if f.u {
         Greedy
       } else {
         NonGreedy
       }
     }
     _ => {
-      if f.U {
+      if f.u {
         NonGreedy
       } else {
         Greedy
@@ -964,14 +963,14 @@ fn parse_bounded_repetition(p: &mut State, f: &mut ParseFlags, stack: &mut ~[Exp
       let quantifier = match p.current() {
         Some('?') => {
           p.next();
-          if f.U {
+          if f.u {
             Greedy
           } else {
             NonGreedy
           }
         },
         _ => {
-          if f.U {
+          if f.u {
             NonGreedy
           } else {
             Greedy
