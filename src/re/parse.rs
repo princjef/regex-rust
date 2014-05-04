@@ -6,7 +6,6 @@ use std::slice;
 use error::ParseError::*;
 use unicode::*;
 use charclass::{Range, new_negated_charclass, perl, ascii, next_char, prev_char};
-use std::strbuf::StrBuf;
 
 #[deriving(Show, Clone, Eq)]
 
@@ -141,7 +140,7 @@ fn parse_escape(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode> {
     }
     Some('Q') => {
       p.next();
-      let mut literal : StrBuf = StrBuf::from_owned_str(~"");
+      let mut literal : ~str = ~"";
       loop {
         match p.current() {
           Some('\\') => {
@@ -149,7 +148,7 @@ fn parse_escape(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode> {
             match p.current() {
               Some('E') => {
                 p.next();
-                return Ok(LiteralString(literal.into_owned()));
+                return Ok(LiteralString(literal));
               },
               Some(c) => {
                 literal.push_char('\\');
@@ -863,7 +862,7 @@ fn parse_repetition_op(p: &mut State, f: &mut ParseFlags, stack: &mut ~[Expr], c
 fn extract_repetition_bounds(p: &mut State) -> Option<(uint, Option<uint>)> {
   // these help parse numbers with more than
   // 1 digit
-  let mut buf: StrBuf = StrBuf::from_owned_str(~"");
+  let mut buf: ~str = ~"";
   let mut len = 0;
 
   loop {
