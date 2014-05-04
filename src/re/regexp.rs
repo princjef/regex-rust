@@ -76,7 +76,7 @@ impl Regexp {
 	pub fn split(&self, input: &str) -> ~[~str] { // This is lengthier than it should be; I'll keep working to improve it.
 		let mut result: ~[~str] = ~[];
 		let mut cur_start = 0;
-		let mut end = input.len();
+		let end = input.len();
 
 		let matches = self.find_all(input); // Check whether input contains the regex
 		for m in matches.iter() {
