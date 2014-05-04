@@ -5,7 +5,6 @@ use parse::{Empty, Literal, CharClass, RangeExpr, RangeTable, NegatedRangeTable,
             Alternation, Concatenation, Repetition, Capture, AssertWordBoundary,
             AssertNonWordBoundary, AssertStart, AssertStartMultiline, AssertEnd,
             AssertEndMultiline, LiteralString, SingleByte };
-use charclass::Range;
 use std::str::CharRange;
 
 #[deriving(Clone)]

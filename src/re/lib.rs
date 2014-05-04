@@ -12,11 +12,11 @@ pub use regexp::UncompiledRegexp;
 
 mod test;
 mod exec;
-mod error;
+pub mod error;
 pub mod parse;
 mod state;
-mod compile;
-mod charclass;
+pub mod compile;
+pub mod charclass;
 mod unicode;
 
 pub mod result;

@@ -76,12 +76,11 @@ impl UncompiledRegexp {
 	pub fn split(&self, input: &str) -> ~[~str] { // This is lengthier than it should be; I'll keep working to improve it.
 		let mut start_indices = ~[];
 		let mut match_lengths = ~[];
-		let mut matches: ~[Match] = ~[];
 		let mut result: ~[~str] = ~[];
 		let len = input.len();
 		let strat = PikeVM::new(self.prog, 0);
 
-		matches = self.find_all(input); // Check whether input contains the regex
+		let matches = self.find_all(input); // Check whether input contains the regex
 		for i in range(0, matches.len()) {
 			let m = matches[i].input.slice(matches[i].start, matches[i].end);
 			if m.is_empty() {
@@ -311,7 +310,7 @@ mod library_functions_test {
 			match printResult {
 				(resS, resN) => {
 					match printExpect {
-						(expS, expN) => fail!(format!("Replacing {:s} in {:s} with {:s} yielded {:s} with {:u} replaces, not expected result of {:s} with {:u} replaces\n", 
+						(expS, expN) => fail!(format!("Replacing {:s} in {:s} with {:s} yielded {:s} with {:u} replaces, not expected result of {:s} with {:u} replaces\n",
 							re, input, replaceWith, resS, resN, expS, expN))
 					}
 				}

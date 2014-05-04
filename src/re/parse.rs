@@ -2,7 +2,6 @@ use state::State;
 use std::char;
 use std::char::MAX;
 use std::str;
-use std::slice;
 use error::ParseError::*;
 use unicode::*;
 use charclass::{Range, new_negated_charclass, perl, ascii, next_char, prev_char};
@@ -150,7 +149,7 @@ fn parse_escape(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode> {
                 p.next();
                 return Ok(LiteralString(literal));
               },
-              Some(c) => {
+              Some(_) => {
                 literal.push_char('\\');
               },
               _ => {return Err(ParseIncompleteEscapeSeq)}
@@ -399,7 +398,7 @@ fn parse_hex_escape(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode
           _ => {return Err(ParseExpectedClosingBrace)}
         }
       },
-    Some(c) => {
+    Some(_) => {
       match extract_hex_value(p) {
         Some(c) => {
             return Ok(Literal(c as char));

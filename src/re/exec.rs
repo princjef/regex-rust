@@ -164,7 +164,6 @@ impl<'a> ExecStrategy for PikeVM<'a> {
     // one dummy thread) that represent different traversal
     // paths through the list of instructions. The only
     // time new threads are created, are when `InstSplit` instructions occur.
-    let v: ~[char] = input.chars().collect();
     for i in range(start_index, input.len()) {
       //println!("-- Execution ({:c}|{:u}) --", c, sp);
 
