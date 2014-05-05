@@ -67,9 +67,9 @@ The current API for the ```Regexp``` class consists of two functions, ```exec()`
 Below is a listing of the functions we would like to implement and the progress on each:
 
   * [```match()```](http://docs.python.org/2/library/re.html#re.RegexObject.match) - *implemented in ```exec()```*  
-  This function attempts to find a match to the regular expression at the beginning of the input string. If a match is found, it return an Option type containing a Match object, which has information about the string that was matched, the index in the input string where the match was found, and the capture groups of the match. If no match is found, it returns an Option type containing None.
+  This function attempts to find a match to the regular expression at the beginning of the input string. If a match is found, it returns an Option type containing a Match object, which has information about the string that was matched, the index in the input string where the match was found, and the capture groups of the match. If no match is found, it returns an Option type containing None.
   * [```search()```](http://docs.python.org/2/library/re.html#re.RegexObject.search) - *implemented*  
-  This function attempts to find a match to the regular expression anywhere in the input string, returning the first match that it finds. If a match is found, it return an Option type containing a Match object. If no match is found, it returns the Option type None.
+  This function attempts to find a match to the regular expression anywhere in the input string, returning the first match that it finds. If a match is found, it returns an Option type containing a Match object. If no match is found, it returns the Option type None.
   * [```split()```](http://docs.python.org/2/library/re.html#re.RegexObject.split) - *implemented*  
   This function splits the input string on all non-overlapping matches of the regular expression in the input string. It returns an array of strings.
   * [```find_all()```](http://docs.python.org/2/library/re.html#re.RegexObject.findall) - *implemented*  
@@ -142,7 +142,7 @@ Search Benchmark (Using C++ as Reference):
 
 *Note: The BurntSushi Library as well is without its compiler support as far as I am made aware*
 
-*Note: The Python Benchmarks seem very off, however we can't fault our benchmark. We believe its an optimization trick*
+*Note: The Python Benchmarks seem very off, however we can't fault our benchmark. We believe it's an optimization trick*
 
 ## Testing
 
