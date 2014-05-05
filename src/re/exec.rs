@@ -21,7 +21,8 @@ pub struct Thread {
   pub pc: uint,
   pub end: uint,
   pub start_sp: uint,
-  pub captures: ~[Option<CapturingGroup>]
+  pub captures: ~[Option<CapturingGroup>],
+  pub reached_end: bool,
 }
 
 impl Thread {
@@ -31,7 +32,8 @@ impl Thread {
       pc: pc,
       end: end,
       start_sp: start_sp,
-      captures: ~[]
+      captures: ~[],
+      reached_end: false
     }
   }
 }
@@ -227,7 +229,7 @@ impl<'a> ExecStrategy for PikeVM<'a> {
             }
           }
           InstAssertStart => {
-            if i == 0 {
+            if i == 0 && t.reached_end == false {
               t.pc = t.pc + 1;
 
               self.addThread(t, &mut clist);
@@ -245,6 +247,7 @@ impl<'a> ExecStrategy for PikeVM<'a> {
             // input string
             if i == input.char_len() - 1 {
               t.pc = t.pc + 1;
+              t.reached_end = true;
 
               self.addThread(t, &mut clist);
             }
