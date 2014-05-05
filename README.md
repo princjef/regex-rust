@@ -75,10 +75,10 @@ Below is a listing of the functions we would like to implement and the progress 
   * [```find_all()```](http://docs.python.org/2/library/re.html#re.RegexObject.findall) - *implemented*  
   This function returns all non-overlapping matches of the regular expression on the input string. It returns an array of Match objects.
   * [```replace()```](http://docs.python.org/2/library/re.html#re.RegexObject.sub) - *implemented*  
-  This function replaces all non-overlapping instances of the regular expression in the input string with a specified replace string. The replace string can make use of the capture groups in each match that is found. Numbered groups are indicated as a backslash followed by the number of the group and named groups are indicated as backslash followed by the character 'g' followed by the name of the group in triangle brackets, e.g. \g<groupName>. This function returns a Result type that either has the replaced string or a ReplStringSpecError. The enumeration for the ReplStringSpecError is
-    * UndefinedGroupName: The replace string specifies a group that was not defined in the regular expression that is being matched on.
-    * GroupNumberOutOfBounds: The replace string specifies a group number that is not used in the regular expression that is being matched on.
-    * MalformedGroupSpec: Some group specification in the replace string is malformed. Examples include not terminating the triangle bracket group name specification or not specifying a group after using '\g'.
+  This function replaces all non-overlapping instances of the regular expression in the input string with a specified replace string. The replace string can make use of the capture groups in each match that is found. Numbered groups are indicated as a backslash followed by the number of the group and named groups are indicated as backslash followed by the character 'g' followed by the name of the group in triangle brackets, e.g. \g<groupName\>. This function returns a Result type that either has the replaced string or a ReplStringSpecError. The enumeration for the ReplStringSpecError is
+   * UndefinedGroupName: The replace string specifies a group that was not defined in the regular expression that is being matched on.
+   * GroupNumberOutOfBounds: The replace string specifies a group number that is not used in the regular expression that is being matched on.
+   * MalformedGroupSpec: Some group specification in the replace string is malformed. Examples include not terminating the triangle bracket group name specification or not specifying a group after using '\g'.
   * [```replacen()```](http://docs.python.org/2/library/re.html#re.RegexObject.subn) - *implemented*  
   This function does the same thing as replace, but it returns a tuple containing the Result type and the number of replaces made.
 
