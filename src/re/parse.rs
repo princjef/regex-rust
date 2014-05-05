@@ -1344,7 +1344,7 @@ mod parse_tests {
 
   #[test]
   fn parse_unicode_charclass_multiple_letter() {
-    test_parse!("\\p{Greek}", Ok(RangeTable(_)));
+    test_parse!("\\p{Greek}", Ok(Capture(~RangeTable(_), 0, None)));
   }
 
   // #[test]
@@ -1354,7 +1354,7 @@ mod parse_tests {
 
   #[test]
   fn parse_unicode_charclass_multiple_letter_negated() {
-    test_parse!("\\P{Latin}", Ok(NegatedRangeTable(_)));
+    test_parse!("\\P{Latin}", Ok(Capture(~NegatedRangeTable(_), 0, None)));
   }
 
   #[test]
@@ -1389,12 +1389,12 @@ mod parse_tests {
 
   #[test]
   fn parse_unicode_charclass_nested() {
-    test_parse!("[sdkfj\\p{Latin}]", Ok(Alternation(~CharClass(_), ~RangeTable(_))));
+    test_parse!("[sdkfj\\p{Latin}]", Ok(Capture(~CharClass(_), 0, None)));
   }
 
   #[test]
   fn parse_ascii_charclass() {
-    test_parse!("[:alpha:]", Ok(RangeTable(_)));
+    test_parse!("[:alpha:]", Ok(Capture(~RangeTable(_), 0, None)));
   }
 
   #[test]
@@ -1409,11 +1409,11 @@ mod parse_tests {
 
   #[test]
   fn parse_ascii_charclass_nested() {
-    test_parse!("[dsf[:print:]]", Ok(Alternation(~CharClass(_), ~RangeTable(_))));
+    test_parse!("[dsf[:print:]]", Ok(Capture(~CharClass(_), 0, None)));
   }
 
   #[test]
   fn parse_nested_flags() {
-    test_parse!("(?i:a)", Ok(CharClass(_)));
+    test_parse!("(?i:a)", Ok(Capture(~CharClass(_), 0, None)));
   }
 }
