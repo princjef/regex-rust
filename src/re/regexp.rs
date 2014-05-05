@@ -80,6 +80,7 @@ impl Regexp {
 
 		let matches = self.find_all(input); // Check whether input contains the regex
 		for m in matches.iter() {
+			if m.start == m.end { break; }
 			result.push(input.slice(cur_start, m.start).to_owned());
 			cur_start = m.end;
 		}
@@ -550,24 +551,28 @@ mod library_functions_test {
 
 	#[test]
 	fn test_split_03() {
-		test_split!("c", "cab", &["ab"]);
+		test_split!("c", "cab", &["", "ab"]);
 	}
 
 	#[test]
 	fn test_split_04() {
-		test_split!("a{1,}", "aaaaaabc", &["bc"]);
+		test_split!("a{1,}", "aaaaaabc", &["", "bc"]);
 	}
 
 	#[test]
 	fn test_split_05() {
-		test_split!("a{1,}", "aaaaaabaab", &["b", "b"]);
+		test_split!("a{1,}", "aaaaaabaab", &["", "b", "b"]);
 	}
 
 	#[test]
 	fn test_split_06() {
-		test_split!("a{1,}", "aaaaaabaaaa", &["b"]);
+		test_split!("a{1,}", "aaaaaabaaaa", &["", "b", ""]);
 	}
 
+	#[test]
+	fn test_split_07() {
+		test_split!("", "aba", &["aba"]);
+	}
 
 }
 
