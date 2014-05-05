@@ -106,7 +106,7 @@ pub fn compile_recursive(re: &Expr) -> ~[Instruction] {
   _compile_recursive(re, &mut stack);
   stack.push(InstMatch);
 
-  //debug_stack(stack.clone());
+  debug_stack(stack.clone());
 
   stack
 }

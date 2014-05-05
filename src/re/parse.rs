@@ -1047,7 +1047,7 @@ fn _parse_recursive(p: &mut State, f: &mut ParseFlags) -> Result<Expr, ParseCode
 
       Some('{') => {
         match parse_bounded_repetition(p, f, &mut stack) {
-          Ok(Empty) => (),
+          Ok(Empty) => stack.push(Literal('{')),
           Ok(expr) => stack.push(expr),
           e => return e
         }
