@@ -122,7 +122,7 @@ impl Regexp {
 		let strat = PikeVM::new(self.prog, 0);
 		let mut replaced = input.to_owned();
 		let mut start = 0;
-		let emptyPatternAdd = if self.prog.len()==1 {1} else {0};
+		let emptyPatternAdd = if self.prog.len()==3 {1} else {0};
 		let mut repCount = 0;
 
 		while start <= replaced.len(){
