@@ -66,13 +66,21 @@ The current API for the ```Regexp``` class consists of two functions, ```exec()`
 
 Below is a listing of the functions we would like to implement and the progress on each:
 
-  * [```match()```](http://docs.python.org/2/library/re.html#re.RegexObject.match) - *implemented in ```exec()```*
-  * [```search()```](http://docs.python.org/2/library/re.html#re.RegexObject.search) - *implemented*
-  * [```split()```](http://docs.python.org/2/library/re.html#re.RegexObject.split) - *not implemented*
-  * [```find_all()```](http://docs.python.org/2/library/re.html#re.RegexObject.findall) - *not implemented*
-  * [```find_iter()```](http://docs.python.org/2/library/re.html#re.RegexObject.finditer) - *not implemented*
-  * [```replace()```](http://docs.python.org/2/library/re.html#re.RegexObject.sub) - *not implemented*
-  * [```replacen()```](http://docs.python.org/2/library/re.html#re.RegexObject.subn) - *not implemented*
+  * [```match()```](http://docs.python.org/2/library/re.html#re.RegexObject.match) - *implemented in ```exec()```*  
+  This function attempts to find a match to the regular expression at the beginning of the input string. If a match is found, it return an Option type containing a Match object, which has information about the string that was matched, the index in the input string where the match was found, and the capture groups of the match. If no match is found, it returns an Option type containing None.
+  * [```search()```](http://docs.python.org/2/library/re.html#re.RegexObject.search) - *implemented*  
+  This function attempts to find a match to the regular expression anywhere in the input string, returning the first match that it finds. If a match is found, it return an Option type containing a Match object. If no match is found, it returns the Option type None.
+  * [```split()```](http://docs.python.org/2/library/re.html#re.RegexObject.split) - *implemented*  
+  This function splits the input string on all non-overlapping matches of the regular expression in the input string. It returns an array of strings.
+  * [```find_all()```](http://docs.python.org/2/library/re.html#re.RegexObject.findall) - *implemented*  
+  This function returns all non-overlapping matches of the regular expression on the input string. It returns an array of Match objects.
+  * [```replace()```](http://docs.python.org/2/library/re.html#re.RegexObject.sub) - *implemented*  
+  This function replaces all non-overlapping instances of the regular expression in the input string with a specified replace string. The replace string can make use of the capture groups in each match that is found. Numbered groups are indicated as a backslash followed by the number of the group and named groups are indicated as backslash followed by the character 'g' followed by the name of the group in triangle brackets, e.g. \g<groupName>. This function returns a Result type that either has the replaced string or a ReplStringSpecError. The enumeration for the ReplStringSpecError is
+    * UndefinedGroupName: The replace string specifies a group that was not defined in the regular expression that is being matched on.
+    * GroupNumberOutOfBounds: The replace string specifies a group number that is not used in the regular expression that is being matched on.
+    * MalformedGroupSpec: Some group specification in the replace string is malformed. Examples include not terminating the triangle bracket group name specification or not specifying a group after using '\g'.
+  * [```replacen()```](http://docs.python.org/2/library/re.html#re.RegexObject.subn) - *implemented*  
+  This function does the same thing as replace, but it returns a tuple containing the Result type and the number of replaces made.
 
 
 
